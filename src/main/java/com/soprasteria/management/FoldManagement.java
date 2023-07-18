@@ -7,12 +7,12 @@ import java.util.List;
 //@RestController
 //@RequestMapping("/")
 public class FoldManagement {
-//    private final List<String> specialCards = List.of("atout", "sirene", "pirate", "skullKing", "baleine", "kraken", "echap");
+//    private final List<String> specialCards = List.of("atout", "sirene", "pirate", "skullKing", "baleine", "kraken", "echape");
     public Card selectWinner(List<Card> cards) {
         Card winnerCard = cards.get(0);
         if (krakenAfterBaleine(cards)
                 || (!krakenAfterBaleine(cards) && cardIsPresent(cards, "kraken") && !cardIsPresent(cards, "baleine"))
-                || allEchapOrBaleine(cards)) {
+                || allEchapeOrBaleine(cards)) {
             winnerCard = null;
         }
         else if (cardIsPresent(cards, "baleine")) {
@@ -46,8 +46,8 @@ public class FoldManagement {
         return false;
     }
 
-    private boolean allEchapOrBaleine(List<Card> cards) {
-        return cards.stream().filter(c -> c.getCardType().equals("echap")).count()
+    private boolean allEchapeOrBaleine(List<Card> cards) {
+        return cards.stream().filter(c -> c.getCardType().equals("echape")).count()
                 + cards.stream().filter(c -> c.getCardType().equals("baleine")).count() == cards.size();
     }
     private boolean cardIsPresent(List<Card> cards, String specialCard) {
@@ -58,10 +58,10 @@ public class FoldManagement {
     }
     private Card atoutOrColorWinnerCard(List<Card> cards, Card winnerCard) {
         for (Card card : cards) {
-            if (cardIsPresent(cards, "baleine") && card.getCardNumber() > winnerCard.getCardNumber()) {
+            if (cardIsPresent(cards, "baleine") && card.getCardValue() > winnerCard.getCardValue()) {
                 winnerCard = card;
             }
-            else if (!cardIsPresent(cards, "baleine") && card.getCardType().equals(winnerCard.getCardType()) && card.getCardNumber() >= winnerCard.getCardNumber()) {
+            else if (!cardIsPresent(cards, "baleine") && card.getCardType().equals(winnerCard.getCardType()) && card.getCardValue() >= winnerCard.getCardValue()) {
                 winnerCard = card;
             }
         }

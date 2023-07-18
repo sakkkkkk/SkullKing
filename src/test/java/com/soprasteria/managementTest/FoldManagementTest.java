@@ -44,7 +44,7 @@ public class FoldManagementTest {
 
         // Then
         Assertions.assertEquals("yellow", winnerCard.getCardType());
-        Assertions.assertEquals(10, winnerCard.getCardNumber());
+        Assertions.assertEquals(10, winnerCard.getCardValue());
         Assertions.assertEquals(cards.get(3), winnerCard);
     }
 
@@ -63,7 +63,7 @@ public class FoldManagementTest {
 
         // Then
         Assertions.assertEquals("atout", winnerCard.getCardType());
-        Assertions.assertEquals(6, winnerCard.getCardNumber());
+        Assertions.assertEquals(6, winnerCard.getCardValue());
         Assertions.assertEquals(cards.get(0), winnerCard);
     }
     @Test
@@ -81,7 +81,7 @@ public class FoldManagementTest {
 
         // Then
         Assertions.assertEquals("atout", winnerCard.getCardType());
-        Assertions.assertEquals(4, winnerCard.getCardNumber());
+        Assertions.assertEquals(4, winnerCard.getCardValue());
         Assertions.assertEquals(cards.get(2), winnerCard);
     }
 
@@ -101,7 +101,7 @@ public class FoldManagementTest {
 
         // Then
         Assertions.assertEquals("sirene", winnerCard.getCardType());
-        Assertions.assertEquals(0, winnerCard.getCardNumber());
+        Assertions.assertEquals(0, winnerCard.getCardValue());
         Assertions.assertEquals(cards.get(1), winnerCard);
     }
 
@@ -121,7 +121,7 @@ public class FoldManagementTest {
 
         // Then
         Assertions.assertEquals("pirate", winnerCard.getCardType());
-        Assertions.assertEquals(0, winnerCard.getCardNumber());
+        Assertions.assertEquals(0, winnerCard.getCardValue());
         Assertions.assertEquals(cards.get(2), winnerCard);
     }
 
@@ -141,7 +141,7 @@ public class FoldManagementTest {
 
         // Then
         Assertions.assertEquals("skullKing", winnerCard.getCardType());
-        Assertions.assertEquals(0, winnerCard.getCardNumber());
+        Assertions.assertEquals(0, winnerCard.getCardValue());
         Assertions.assertEquals(cards.get(5), winnerCard);
     }
     @Test
@@ -160,7 +160,7 @@ public class FoldManagementTest {
 
         // Then
         Assertions.assertEquals("sirene", winnerCard.getCardType());
-        Assertions.assertEquals(0, winnerCard.getCardNumber());
+        Assertions.assertEquals(0, winnerCard.getCardValue());
         Assertions.assertEquals(cards.get(5), winnerCard);
     }
     @Test
@@ -179,7 +179,7 @@ public class FoldManagementTest {
 
         // Then
         Assertions.assertEquals("yellow", winnerCard.getCardType());
-        Assertions.assertEquals(10, winnerCard.getCardNumber());
+        Assertions.assertEquals(10, winnerCard.getCardValue());
         Assertions.assertEquals(cards.get(0), winnerCard);
     }
 
@@ -202,13 +202,13 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void no_card_winner_because_of_all_echap_cards_in_this_fold() {
+    public void no_card_winner_because_of_all_echape_cards_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
-        cards.add(0, addToFold("echap", 0, 1));
-        cards.add(1, addToFold("echap", 0, 2));
-        cards.add(2, addToFold("echap", 0, 3));
-        cards.add(3, addToFold("echap", 0, 4));
+        cards.add(0, addToFold("echape", 0, 1));
+        cards.add(1, addToFold("echape", 0, 2));
+        cards.add(2, addToFold("echape", 0, 3));
+        cards.add(3, addToFold("echape", 0, 4));
 
         // When
         Card winnerCard = foldManagement.selectWinner(cards);
@@ -218,14 +218,14 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void no_card_winner_because_of_all_echap_cards_and_baleine_in_this_fold() {
+    public void no_card_winner_because_of_all_echape_cards_and_baleine_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
-        cards.add(0, addToFold("echap", 0, 1));
-        cards.add(1, addToFold("echap", 0, 2));
+        cards.add(0, addToFold("echape", 0, 1));
+        cards.add(1, addToFold("echape", 0, 2));
         cards.add(2, addToFold("baleine", 0, 3));
-        cards.add(3, addToFold("echap", 0, 4));
-        cards.add(4, addToFold("echap", 0, 5));
+        cards.add(3, addToFold("echape", 0, 4));
+        cards.add(4, addToFold("echape", 0, 5));
 
         // When
         Card winnerCard = foldManagement.selectWinner(cards);
@@ -268,7 +268,7 @@ public class FoldManagementTest {
 
         // Then
         Assertions.assertEquals("yellow", winnerCard.getCardType());
-        Assertions.assertEquals(10, winnerCard.getCardNumber());
+        Assertions.assertEquals(10, winnerCard.getCardValue());
         Assertions.assertEquals(cards.get(0), winnerCard);
     }
     private Card addToFold(String cardType, int cardNumber, int cardPosition) {

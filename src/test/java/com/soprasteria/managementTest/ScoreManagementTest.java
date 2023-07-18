@@ -13,7 +13,7 @@ public class ScoreManagementTest {
     private final ScoreManagement scoreManagement = new ScoreManagement();
 
     @Test
-    public void score_10_per_fold_if_bet_0_fold_success_for_5th_set() {
+    public void plus_10_per_fold_if_bet_0_fold_success_in_the_5th_set() {
         // Given
         int bet = 0;
         List<Integer> folds = generateFolds(0, 5);
@@ -24,7 +24,7 @@ public class ScoreManagementTest {
     }
 
     @Test
-    public void score_minus_10_per_fold_if_bet_0_fold_failed_for_5th_set() {
+    public void minus_10_per_fold_if_bet_0_fold_failed_in_the_5th_set() {
         // Given
         int bet = 0;
         List<Integer> folds = new ArrayList<>();
@@ -37,7 +37,7 @@ public class ScoreManagementTest {
     }
 
     @Test
-    public void score_20_per_fold_won_if_bet_0_fold_for_5th_set() {
+    public void plus_20_per_fold_won_if_bet_sup_to_0_fold_success_in_the_5th_set() {
         // Given
         int bet = 2;
         List<Integer> folds = new ArrayList<>();
@@ -50,7 +50,7 @@ public class ScoreManagementTest {
     }
 
     @Test
-    public void score_minus_10_per_difference_between_bet_and_folds_won_if_bet_sup_to_0_failed_for_5th_set() {
+    public void minus_10_per_difference_between_bet_and_folds_won_if_bet_sup_to_0_failed_in_the_5th_set() {
         // Given
         int bet = 2;
         List<Integer> folds = new ArrayList<>();
@@ -62,10 +62,10 @@ public class ScoreManagementTest {
         Assertions.assertEquals(-10, score);
     }
 
-    private List<Integer> generateFolds(int winningFolds, int numberOfFolds) {
+    private List<Integer> generateFolds(int foldsWon, int numberOfFolds) {
         List<Integer> folds = new ArrayList<>();
         for (int foldIndex = 0; foldIndex < numberOfFolds; foldIndex++) {
-            folds.add(winningFolds);
+            folds.add(foldsWon);
         }
         return folds;
     }

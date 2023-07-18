@@ -2,7 +2,7 @@ package com.soprasteria.model;
 
 public class Card {
     private String cardType;
-    private int cardNumber;
+    private int cardValue;
     private int cardPosition;
 
     public String getCardType() {
@@ -13,12 +13,12 @@ public class Card {
         this.cardType = cardType;
     }
 
-    public int getCardNumber() {
-        return cardNumber;
+    public int getCardValue() {
+        return cardValue;
     }
 
-    public void setCardNumber(int cardNumber) {
-        this.cardNumber = cardNumber;
+    public void setCardValue(int cardValue) {
+        this.cardValue = cardValue;
     }
 
     public int getCardPosition() {
@@ -32,7 +32,7 @@ public class Card {
 
     public Card(String type, int number, int position) {
         this.cardType = type;
-        this.cardNumber = number;
+        this.cardValue = number;
         this.cardPosition = position;
     }
 }
