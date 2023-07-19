@@ -1,33 +1,21 @@
 package com.soprasteria.management;
 
-
-import java.util.List;
-
 import static java.lang.Math.abs;
 
 public class ScoreManagement {
-    private static final BonusScoreManagement bonusScoreManagement = new BonusScoreManagement();
-    private static final int NUMBER_OF_FOLDS = 5;
-
-    public int scoreCounter(int bet, List<Integer> folds) {
+    public int scoreCounter(int bet, int foldsWon, int setNumber) {
         int score;
-        int bonus = 0;
-        if (bet > 0 && success(bet, folds)) {
-            score = 20 * bet + bonus;
+
+        if (bet > 0 && bet == foldsWon) {
+            score = 20 * bet;
         } else if (bet > 0) {
-            score = -10 * abs(bet - folds.stream().reduce(0, Integer::sum));
-        } else if (bet == 0 && success(bet, folds)) {
-            score = betEqualsZero() + bonus;
-        } else { score = -betEqualsZero(); }
+            score = -10 * abs(bet - foldsWon);
+        } else if (bet == 0 && bet == foldsWon) {
+            score = 10 * setNumber;
+        } else {
+            score = -10 * setNumber;
+        }
+
         return score;
     }
-
-    private boolean success(int bet, List<Integer > folds) {
-        return folds.stream().reduce(0, Integer::sum) == bet;
-    }
-
-    private int betEqualsZero() {
-        return 10 * ScoreManagement.NUMBER_OF_FOLDS;
-    }
-
 }

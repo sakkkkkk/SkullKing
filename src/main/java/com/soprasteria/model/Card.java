@@ -1,38 +1,42 @@
 package com.soprasteria.model;
 
+import java.util.Objects;
+
 public class Card {
-    private String cardType;
-    private int cardValue;
-    private int cardPosition;
+    private String name;
+    private int value;
 
-    public String getCardType() {
-        return cardType;
+    public String getName() {
+        return name;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getCardValue() {
-        return cardValue;
+    public int getValue() {
+        return value;
     }
 
-    public void setCardValue(int cardValue) {
-        this.cardValue = cardValue;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return value == card.value && Objects.equals(name, card.name);
     }
 
-    public int getCardPosition() {
-        return cardPosition;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, value);
     }
 
-    public void setCardPosition(int cardPosition) {
-        this.cardPosition = cardPosition;
+    public void setValue(int value) {
+        this.value = value;
     }
 
-
-    public Card(String type, int number, int position) {
-        this.cardType = type;
-        this.cardValue = number;
-        this.cardPosition = position;
+    public Card(String name, int value) {
+        this.name = name;
+        this.value = value;
     }
 }
