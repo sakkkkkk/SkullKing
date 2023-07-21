@@ -1,9 +1,6 @@
 package com.soprasteria.management;
 
-import com.soprasteria.model.Card;
 import com.soprasteria.model.Player;
-
-import java.util.List;
 
 public class TotalScoreManagement {
 
@@ -12,9 +9,9 @@ public class TotalScoreManagement {
 
     public int totalScore(Player player, int setNumber) {
         int bonus = 0;
-        if (!player.getFolds().isEmpty()) {
+        if (player.getBet() > 0 && player.getBet() == player.getFolds().size()) {
             for (int foldIndex = 0; foldIndex < player.getFolds().size(); foldIndex++) {
-                bonus += bonusManagement.countBonus(player.getFolds().get(foldIndex));
+                bonus += bonusManagement.countBonus(player.getFolds().get(foldIndex).getCards());
             }
         }
         int score = scoreManagement.scoreCounter(player.getBet(), player.getFolds().size(), setNumber);

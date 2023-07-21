@@ -12,4 +12,8 @@ public class Fold {
     public void setCards(List<Card> cards) {
         this.cards = cards;
     }
+
+    public Fold(List<Card> cards) {
+        this.cards = cards;
+    }
 }

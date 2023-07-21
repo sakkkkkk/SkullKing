@@ -27,58 +27,69 @@ public class DeckManagementTest {
     public void total_of_each_color_cards_and_atout_in_deck_of_skull_king_game() {
         // Given
         List<Card> deck = deckManagement.skullKingDeck();
+        List<Integer> totalEachColorAndAtout = new ArrayList<>();
 
         // When
-        int totalOfYellow = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.Yellow.name())).count();
-        int totalOfGreen = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.Green.name())).count();
-        int totalOfPurple = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.Purple.name())).count();
-        int totalOfAtout = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.Atout.name())).count();
+        for (int nameCardEnumIndex = 0; nameCardEnumIndex < NameCardEnum.Pirate.ordinal(); nameCardEnumIndex++) {
+            int finalNameCardEnumIndex = nameCardEnumIndex;
+            totalEachColorAndAtout.add((int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.getNameCard(finalNameCardEnumIndex).name())).count());
+        }
 
         // Then
-        Assertions.assertEquals(14, totalOfYellow);
-        Assertions.assertEquals(14, totalOfGreen);
-        Assertions.assertEquals(14, totalOfPurple);
-        Assertions.assertEquals(14, totalOfAtout);
+        for (Integer total : totalEachColorAndAtout) {
+            Assertions.assertEquals(14, total);
+        }
     }
 
     @Test
-    public void total_of_each_special_cards_in_deck_of_skull_king_game() {
+    public void total_of_each_special_card_in_deck_of_skull_king_game() {
         // Given
         List<Card> deck = deckManagement.skullKingDeck();
+        List<Integer> totalEachSpecialCard = new ArrayList<>();
 
         // When
-        int totalOfPirate = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.Pirate.name())).count();
-        int totalOfSirene = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.Sirene.name())).count();
-        int totalOfSkullKing = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.SkullKing.name())).count();
-        int totalOfBaleine = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.Baleine.name())).count();
-        int totalOfKraken = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.Kraken.name())).count();
-        int totalOfEchape = (int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.Echape.name())).count();
+        for (int nameCardEnumIndex = NameCardEnum.Pirate.ordinal(); nameCardEnumIndex < NameCardEnum.values().length; nameCardEnumIndex++) {
+            int finalNameCardEnumIndex = nameCardEnumIndex;
+            totalEachSpecialCard.add((int) deck.stream().filter(c -> c.getName().equals(NameCardEnum.getNameCard(finalNameCardEnumIndex).name())).count());
+        }
 
         // Then
-        Assertions.assertEquals(6, totalOfPirate);
-        Assertions.assertEquals(2, totalOfSirene);
-        Assertions.assertEquals(1, totalOfSkullKing);
-        Assertions.assertEquals(1, totalOfBaleine);
-        Assertions.assertEquals(1, totalOfKraken);
-        Assertions.assertEquals(7, totalOfEchape);
+        for (int totalEachSpecialCardIndex = 0; totalEachSpecialCardIndex < totalEachSpecialCard.size(); totalEachSpecialCardIndex++) {
+            Assertions.assertEquals(NameCardEnum.getNameCard(totalEachSpecialCardIndex + NameCardEnum.Pirate.ordinal()).getMultiplicityOfCardEnum(), totalEachSpecialCard.get(totalEachSpecialCardIndex));
+        }
     }
 
     @Test
-    public void all_color_and_atout_cards_distinct_in_deck_of_skull_king_game() {
+    public void all_color_and_atout_cards_are_distinct_in_deck_of_skull_king_game() {
         // Given
         List<Card> deck = deckManagement.skullKingDeck();
+        List<Boolean> allDistincts = new ArrayList<>();
 
         // When
-        List<Boolean> allDistinct = new ArrayList<>();
-        for (int nameCardEnumIndex = 0; nameCardEnumIndex < NameCardEnum.values().length; nameCardEnumIndex++) {
-            if (nameCardEnumIndex < NameCardEnum.Pirate.ordinal()) {
-                int finalNameCardEnumIndex = nameCardEnumIndex;
-                allDistinct.add(deck.stream().filter(c -> c.getName().equals(NameCardEnum.getNameCard(finalNameCardEnumIndex).name())).distinct().count() != 1);
-            }
+        for (int nameCardEnumIndex = 0; nameCardEnumIndex < NameCardEnum.Pirate.ordinal(); nameCardEnumIndex++) {
+            int finalNameCardEnumIndex = nameCardEnumIndex;
+            allDistincts.add(deck.stream().filter(c -> c.getName().equals(NameCardEnum.getNameCard(finalNameCardEnumIndex).name())).distinct().count() != 1);
         }
         // Then
-        for (Boolean distinct : allDistinct) {
+        for (Boolean distinct : allDistincts) {
             Assertions.assertTrue(distinct);
+        }
+    }
+
+    @Test
+    public void all_each_special_card_are_equals_in_deck_of_skull_king_game() {
+        // Given
+        List<Card> deck = deckManagement.skullKingDeck();
+        List<Boolean> allEquals = new ArrayList<>();
+
+        // When
+        for (int nameCardEnumIndex = NameCardEnum.Pirate.ordinal(); nameCardEnumIndex < NameCardEnum.values().length; nameCardEnumIndex++) {
+            int finalNameCardEnumIndex = nameCardEnumIndex;
+            allEquals.add(deck.stream().filter(c -> c.getName().equals(NameCardEnum.getNameCard(finalNameCardEnumIndex).name())).distinct().count() == 1);
+        }
+        // Then
+        for (Boolean equal : allEquals) {
+            Assertions.assertTrue(equal);
         }
     }
 }

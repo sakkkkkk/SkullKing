@@ -7,7 +7,7 @@ public class Player {
     private String name;
     private int bet;
     private int totalScore;
-    private List<List<Card>> folds;
+    private List<Fold> folds;
 
     public int getId() {
         return id;
@@ -34,19 +34,26 @@ public class Player {
         return totalScore;
     }
 
-    public List<List<Card>> getFolds() {
-        return folds;
-    }
-
-    public void setFolds(List<List<Card>> folds) {
-        this.folds = folds;
-    }
-
     public int getBet() {
         return bet;
     }
 
     public void setBet(int bet) {
         this.bet = bet;
+    }
+
+    public List<Fold> getFolds() {
+        return folds;
+    }
+
+    public void setFolds(List<Fold> folds) {
+        this.folds = folds;
+    }
+
+    public Player(int id, String name, int bet, List<Fold> folds) {
+        this.id = id;
+        this.name = name;
+        this.bet = bet;
+        this.folds = folds;
     }
 }
