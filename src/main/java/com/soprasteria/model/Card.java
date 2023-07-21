@@ -18,6 +18,10 @@ public class Card {
         return value;
     }
 
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,10 +33,6 @@ public class Card {
     @Override
     public int hashCode() {
         return Objects.hash(name, value);
-    }
-
-    public void setValue(int value) {
-        this.value = value;
     }
 
     public Card(String name, int value) {
