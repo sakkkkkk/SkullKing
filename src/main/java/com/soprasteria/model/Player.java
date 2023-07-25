@@ -5,6 +5,7 @@ import java.util.List;
 public class Player {
     private int id;
     private String name;
+    private List<Card> cards;
     private int bet;
     private int totalScore;
     private List<Fold> folds;
@@ -55,5 +56,13 @@ public class Player {
         this.name = name;
         this.bet = bet;
         this.folds = folds;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 }

@@ -1,7 +1,7 @@
 package com.soprasteria.managementTest;
 
-import com.soprasteria.NameCardEnum;
-import com.soprasteria.management.DeckManagement;
+import com.soprasteria.enums.NameCardEnum;
+import com.soprasteria.service.impl.DeckServiceImpl;
 import com.soprasteria.model.Card;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,9 +9,11 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class DeckManagementTest {
 
-    DeckManagement deckManagement = new DeckManagement();
+    DeckServiceImpl deckManagement = new DeckServiceImpl();
     @Test
     public void total_cards_in_deck_of_skull_king_game() {
         // Given
@@ -20,7 +22,8 @@ public class DeckManagementTest {
         // When
 
         // Then
-        Assertions.assertEquals(74, deck.size());
+        int totalExpected = 4 * 14 + 6 + 2 + 1 + 1 + 1 + 7;
+        assertThat(deck.size()).isEqualTo(totalExpected);
     }
 
     @Test
@@ -36,8 +39,8 @@ public class DeckManagementTest {
         }
 
         // Then
-        for (Integer total : totalEachColorAndAtout) {
-            Assertions.assertEquals(14, total);
+        for (int totalIndex = 0; totalIndex < totalEachColorAndAtout.size(); totalIndex++) {
+            assertThat(totalEachColorAndAtout.get(totalIndex)).isEqualTo(NameCardEnum.getNameCard(totalIndex).getMultiplicityOfCardEnum());
         }
     }
 
@@ -55,7 +58,7 @@ public class DeckManagementTest {
 
         // Then
         for (int totalEachSpecialCardIndex = 0; totalEachSpecialCardIndex < totalEachSpecialCard.size(); totalEachSpecialCardIndex++) {
-            Assertions.assertEquals(NameCardEnum.getNameCard(totalEachSpecialCardIndex + NameCardEnum.Pirate.ordinal()).getMultiplicityOfCardEnum(), totalEachSpecialCard.get(totalEachSpecialCardIndex));
+            assertThat(totalEachSpecialCard.get(totalEachSpecialCardIndex)).isEqualTo(NameCardEnum.getNameCard(totalEachSpecialCardIndex + NameCardEnum.Pirate.ordinal()).getMultiplicityOfCardEnum());
         }
     }
 
@@ -63,15 +66,15 @@ public class DeckManagementTest {
     public void all_color_and_atout_cards_are_distinct_in_deck_of_skull_king_game() {
         // Given
         List<Card> deck = deckManagement.skullKingDeck();
-        List<Boolean> allDistincts = new ArrayList<>();
+        List<Boolean> allDistinct = new ArrayList<>();
 
         // When
         for (int nameCardEnumIndex = 0; nameCardEnumIndex < NameCardEnum.Pirate.ordinal(); nameCardEnumIndex++) {
             int finalNameCardEnumIndex = nameCardEnumIndex;
-            allDistincts.add(deck.stream().filter(c -> c.getName().equals(NameCardEnum.getNameCard(finalNameCardEnumIndex).name())).distinct().count() != 1);
+            allDistinct.add(deck.stream().filter(c -> c.getName().equals(NameCardEnum.getNameCard(finalNameCardEnumIndex).name())).distinct().count() != 1);
         }
         // Then
-        for (Boolean distinct : allDistincts) {
+        for (Boolean distinct : allDistinct) {
             Assertions.assertTrue(distinct);
         }
     }

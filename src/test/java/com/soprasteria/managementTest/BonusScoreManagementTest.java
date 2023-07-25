@@ -1,22 +1,23 @@
 package com.soprasteria.managementTest;
 
-import com.soprasteria.NameCardEnum;
-import com.soprasteria.management.BonusScoreManagement;
+import com.soprasteria.enums.NameCardEnum;
+import com.soprasteria.service.impl.BonusScoreServiceImpl;
 import com.soprasteria.model.Card;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@SpringBootTest(classes = BonusScoreManagement.class)
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest(classes = BonusScoreServiceImpl.class)
 public class BonusScoreManagementTest {
 
-    private final BonusScoreManagement bonusScoreManagement = new BonusScoreManagement();
+    private final BonusScoreServiceImpl bonusScoreManagement = new BonusScoreServiceImpl();
 
     @Test
-    public void bonus_20_with_two_number_card_14_in_this_fold() {
+    public void bonus_20_with_two_cards_color_number_14_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -27,7 +28,7 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(20, bonusScore);
+        assertThat(bonusScore).isEqualTo(2 * 10);
     }
 
     @Test
@@ -45,7 +46,7 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(60, bonusScore);
+        assertThat(bonusScore).isEqualTo(2 * 30);
     }
 
     @Test
@@ -63,11 +64,11 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(80, bonusScore);
+        assertThat(bonusScore).isEqualTo(2 * 30 + 20);
     }
 
     @Test
-    public void bonus_20_with_pirate_card_winner_against_sirene_in_this_fold() {
+    public void bonus_20_with_first_pirate_card_winner_against_sirene_and_collecting_one_pirate_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -81,11 +82,11 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(20, bonusScore);
+        assertThat(bonusScore).isEqualTo(20);
     }
 
     @Test
-    public void bonus_40_with_pirate_card_winner_against_sirene_and_atout_14_in_this_fold() {
+    public void bonus_40_with_pirate_card_winner_against_sirene_and_collecting_one_pirate_and_atout_14_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -99,11 +100,11 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(40, bonusScore);
+        assertThat(bonusScore).isEqualTo(20 + 20);
     }
 
     @Test
-    public void bonus_40_sirene_card_winner_against_all_cards_with_pirate_and_skullKing_in_this_fold() {
+    public void bonus_40_sirene_card_winner_against_all_cards_with_pirate_and_collecting_skullKing_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -117,7 +118,7 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(40, bonusScore);
+        assertThat(bonusScore).isEqualTo(40);
     }
 
     @Test
@@ -135,7 +136,7 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(70, bonusScore);
+        assertThat(bonusScore).isEqualTo(40 + 10 + 20);
     }
 
     @Test
@@ -153,11 +154,11 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(0, bonusScore);
+        assertThat(bonusScore).isEqualTo(0);
     }
 
     @Test
-    public void bonus_20_sirene_card_winner_without_skullKing_with_yellow_and_green_14_in_this_fold() {
+    public void bonus_20_sirene_card_winner_without_skullKing_collecting_yellow_and_green_14_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 14));
@@ -171,7 +172,7 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(20, bonusScore);
+        assertThat(bonusScore).isEqualTo(2 * 10);
     }
 
     @Test
@@ -189,6 +190,6 @@ public class BonusScoreManagementTest {
         int bonusScore = bonusScoreManagement.countBonus(cards);
 
         // Then
-        Assertions.assertEquals(0, bonusScore);
+        assertThat(bonusScore).isEqualTo(0);
     }
 }

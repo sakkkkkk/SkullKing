@@ -1,16 +1,18 @@
-package com.soprasteria.management;
+package com.soprasteria.service.impl;
 
-import com.soprasteria.NameCardEnum;
+import com.soprasteria.enums.NameCardEnum;
 import com.soprasteria.model.Card;
+import com.soprasteria.service.BonusScoreService;
 
 import java.util.List;
 
-public class BonusScoreManagement {
+public class BonusScoreServiceImpl implements BonusScoreService {
 
-    private final FoldManagement foldManagement = new FoldManagement();
+    private final FoldServiceImpl foldManagement = new FoldServiceImpl();
 
     public int countBonus(List<Card> cards) {
         int bonus = 0;
+
         if (foldManagement.selectWinner(cards) == null) {
             return bonus;
         }
@@ -37,6 +39,7 @@ public class BonusScoreManagement {
             int totalOfColor14 = (int) cards.stream().filter(c -> !c.getName().equals(NameCardEnum.Atout.name()) && c.getValue() == 14).count();
             bonus += 10 * totalOfColor14;
         }
+
         return bonus;
     }
 

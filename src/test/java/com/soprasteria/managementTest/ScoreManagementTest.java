@@ -1,13 +1,15 @@
 package com.soprasteria.managementTest;
 
-import com.soprasteria.management.ScoreManagement;
-import org.junit.jupiter.api.Assertions;
+import com.soprasteria.service.impl.ScoreServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = ScoreManagement.class)
+import static java.lang.Math.abs;
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest(classes = ScoreServiceImpl.class)
 public class ScoreManagementTest {
-    private final ScoreManagement scoreManagement = new ScoreManagement();
+    private final ScoreServiceImpl scoreManagement = new ScoreServiceImpl();
 
     @Test
     public void plus_10_per_fold_if_bet_0_fold_success() {
@@ -20,7 +22,7 @@ public class ScoreManagementTest {
         int score = scoreManagement.scoreCounter(bet, foldsWon, setNumber);
 
         // Then
-        Assertions.assertEquals(50, score);
+        assertThat(score).isEqualTo(setNumber * 10);
     }
 
     @Test
@@ -34,7 +36,8 @@ public class ScoreManagementTest {
         int score = scoreManagement.scoreCounter(bet, foldsWon, setNumber);
 
         // Then
-        Assertions.assertEquals(-50, score);
+
+        assertThat(score).isEqualTo(- setNumber * 10);
     }
 
     @Test
@@ -48,7 +51,7 @@ public class ScoreManagementTest {
         int score = scoreManagement.scoreCounter(bet, foldsWon, setNumber);
 
         // Then
-        Assertions.assertEquals(40, score);
+        assertThat(score).isEqualTo(bet * 20);
     }
 
     @Test
@@ -62,7 +65,6 @@ public class ScoreManagementTest {
         int score = scoreManagement.scoreCounter(bet, foldsWon, setNumber);
 
         // Then
-        Assertions.assertEquals(-10, score);
+        assertThat(score).isEqualTo(- abs(bet - foldsWon) * 10);
     }
-
 }

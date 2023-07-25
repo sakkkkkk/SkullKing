@@ -1,4 +1,4 @@
-package com.soprasteria;
+package com.soprasteria.enums;
 
 public enum NameCardEnum {
     Yellow(14), Green(14), Purple(14), Atout(14), Pirate(6), Sirene(2), SkullKing(1), Baleine(1), Kraken(1), Echape(7);

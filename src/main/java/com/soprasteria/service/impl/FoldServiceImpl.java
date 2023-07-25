@@ -1,13 +1,14 @@
-package com.soprasteria.management;
+package com.soprasteria.service.impl;
 
-import com.soprasteria.NameCardEnum;
+import com.soprasteria.enums.NameCardEnum;
 import com.soprasteria.model.Card;
+import com.soprasteria.service.FoldService;
 
 import java.util.List;
 
 //@RestController
 //@RequestMapping("/")
-public class FoldManagement {
+public class FoldServiceImpl implements FoldService {
 
     public Card selectWinner(List<Card> cards) {
         Card winnerCard = cards.get(0);
@@ -16,18 +17,24 @@ public class FoldManagement {
                 || (!krakenAfterBaleine(cards) && cardIsPresent(cards, NameCardEnum.Kraken.name()) && !cardIsPresent(cards, NameCardEnum.Baleine.name()))
                 || allEchapeOrBaleine(cards)) {
             winnerCard = null;
-        } else if (cardIsPresent(cards, NameCardEnum.Baleine.name())) {
+        }
+        else if (cardIsPresent(cards, NameCardEnum.Baleine.name())) {
             winnerCard = atoutOrColorWinnerCard(cards, winnerCard);
-        } else if (cardIsPresent(cards, NameCardEnum.SkullKing.name()) && !cardIsPresent(cards, NameCardEnum.Sirene.name())) {
+        }
+        else if (cardIsPresent(cards, NameCardEnum.SkullKing.name()) && !cardIsPresent(cards, NameCardEnum.Sirene.name())) {
             winnerCard = winnerCardType(cards, NameCardEnum.SkullKing.name());
-        } else if (cardIsPresent(cards, NameCardEnum.Pirate.name()) && !cardIsPresent(cards, NameCardEnum.SkullKing.name())) {
+        }
+        else if (cardIsPresent(cards, NameCardEnum.Pirate.name()) && !cardIsPresent(cards, NameCardEnum.SkullKing.name())) {
             winnerCard = winnerCardType(cards, NameCardEnum.Pirate.name());
-        } else if (cardIsPresent(cards, NameCardEnum.Sirene.name())) {
+        }
+        else if (cardIsPresent(cards, NameCardEnum.Sirene.name())) {
             winnerCard = winnerCardType(cards, NameCardEnum.Sirene.name());
-        } else if (cardIsPresent(cards, NameCardEnum.Atout.name())) {
+        }
+        else if (cardIsPresent(cards, NameCardEnum.Atout.name())) {
             winnerCard = winnerCardType(cards, NameCardEnum.Atout.name());
             winnerCard = atoutOrColorWinnerCard(cards, winnerCard);
-        } else {
+        }
+        else {
             winnerCard = atoutOrColorWinnerCard(cards, winnerCard);
         }
         return winnerCard;
@@ -57,7 +64,8 @@ public class FoldManagement {
         for (Card card : cards) {
             if (cardIsPresent(cards, NameCardEnum.Baleine.name()) && card.getValue() > winnerCard.getValue()) {
                 winnerCard = card;
-            } else if (!cardIsPresent(cards, NameCardEnum.Baleine.name()) && card.getName().equals(winnerCard.getName()) && card.getValue() >= winnerCard.getValue()) {
+            }
+            else if (!cardIsPresent(cards, NameCardEnum.Baleine.name()) && card.getName().equals(winnerCard.getName()) && card.getValue() >= winnerCard.getValue()) {
                 winnerCard = card;
             }
         }

@@ -1,18 +1,20 @@
 package com.soprasteria.managementTest;
 
-import com.soprasteria.NameCardEnum;
-import com.soprasteria.management.TotalScoreManagement;
+import com.soprasteria.enums.NameCardEnum;
+import com.soprasteria.service.impl.TotalScoreServiceImpl;
 import com.soprasteria.model.Card;
 import com.soprasteria.model.Fold;
 import com.soprasteria.model.Player;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.abs;
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class TotalScoreManagementTest {
-    private final TotalScoreManagement totalScoreManagement = new TotalScoreManagement();
+    private final TotalScoreServiceImpl totalScoreManagement = new TotalScoreServiceImpl();
 
     @Test
     public void total_score_30_bet_0_fold_success_AND_bonus_0() {
@@ -25,9 +27,10 @@ public class TotalScoreManagementTest {
         int totalScore = totalScoreManagement.totalScore(player, setNumber);
 
         // Then
-        Assertions.assertEquals(30, totalScore);
+        int scorePerFoldWithBet0Success = 10;
+        assertThat(totalScore).isEqualTo(setNumber * scorePerFoldWithBet0Success);
     }
-
+    
     @Test
     public void total_score_40_bet_1_fold_success_with_bonus_20_with_two_number_card_14_in_this_set() {
         // Given
@@ -46,7 +49,8 @@ public class TotalScoreManagementTest {
         int totalScore = totalScoreManagement.totalScore(player, setNumber);
 
         // Then
-        Assertions.assertEquals(40, totalScore);
+        int scorePerFoldWithBet1Success = 20;
+        assertThat(totalScore).isEqualTo(player.getBet() * scorePerFoldWithBet1Success + 2 * 10);
     }
 
     @Test
@@ -67,7 +71,8 @@ public class TotalScoreManagementTest {
         int totalScore = totalScoreManagement.totalScore(player, setNumber);
 
         // Then
-        Assertions.assertEquals(-10, totalScore);
+        int scorePerFoldBet2Failed = - 10;
+        assertThat(totalScore).isEqualTo(abs(player.getBet() - setNumber) * scorePerFoldBet2Failed);
     }
 
     @Test
@@ -96,6 +101,8 @@ public class TotalScoreManagementTest {
         int totalScore = totalScoreManagement.totalScore(player, setNumber);
 
         // Then
-        Assertions.assertEquals(140, totalScore);
+        int scorePerFoldBet2Success = 20;
+        int bonus = 2 * 30 + 20 + 2 * 10;
+        assertThat(totalScore).isEqualTo(player.getBet() * scorePerFoldBet2Success + bonus);
     }
 }

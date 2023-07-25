@@ -1,7 +1,7 @@
 package com.soprasteria.managementTest;
 
-import com.soprasteria.NameCardEnum;
-import com.soprasteria.management.FoldManagement;
+import com.soprasteria.enums.NameCardEnum;
+import com.soprasteria.service.impl.FoldServiceImpl;
 import com.soprasteria.model.Card;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,10 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-@SpringBootTest(classes = FoldManagement.class)
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest(classes = FoldServiceImpl.class)
 public class FoldManagementTest {
 
-    private final FoldManagement foldManagement = new FoldManagement();
+    private final FoldServiceImpl foldManagement = new FoldServiceImpl();
 
     @Test
     public void color_yellow_request_by_first_card_played_in_this_fold() {
@@ -27,7 +29,7 @@ public class FoldManagementTest {
         Card cardColorRequest = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.Yellow.name(), cardColorRequest.getName());
+        assertThat(cardColorRequest.getName()).isEqualTo(NameCardEnum.Yellow.name());
     }
 
     @Test
@@ -44,9 +46,9 @@ public class FoldManagementTest {
         Card winnerCard = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.Yellow.name(), winnerCard.getName());
-        Assertions.assertEquals(10, winnerCard.getValue());
-        Assertions.assertEquals(cards.get(3), winnerCard);
+        assertThat(winnerCard.getName()).isEqualTo(NameCardEnum.Yellow.name());
+        assertThat(winnerCard.getValue()).isEqualTo(cards.get(3).getValue());
+        assertThat(winnerCard).isEqualTo(cards.get(3));
     }
 
     @Test
@@ -63,10 +65,11 @@ public class FoldManagementTest {
         Card winnerCard = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.Atout.name(), winnerCard.getName());
-        Assertions.assertEquals(6, winnerCard.getValue());
-        Assertions.assertEquals(cards.get(0), winnerCard);
+        assertThat(winnerCard.getName()).isEqualTo(NameCardEnum.Atout.name());
+        assertThat(winnerCard.getValue()).isEqualTo(cards.get(0).getValue());
+        assertThat(winnerCard).isEqualTo(cards.get(0));
     }
+
     @Test
     public void highest_value_atout_card_winner_against_all_color_cards_in_this_fold() {
         // Given
@@ -81,9 +84,9 @@ public class FoldManagementTest {
         Card winnerCard = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.Atout.name(), winnerCard.getName());
-        Assertions.assertEquals(4, winnerCard.getValue());
-        Assertions.assertEquals(cards.get(2), winnerCard);
+        assertThat(winnerCard.getName()).isEqualTo(NameCardEnum.Atout.name());
+        assertThat(winnerCard.getValue()).isEqualTo(cards.get(2).getValue());
+        assertThat(winnerCard).isEqualTo(cards.get(2));
     }
 
     @Test
@@ -101,9 +104,9 @@ public class FoldManagementTest {
         Card winnerCard = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.Sirene.name(), winnerCard.getName());
-        Assertions.assertEquals(0, winnerCard.getValue());
-        Assertions.assertEquals(cards.get(1), winnerCard);
+        assertThat(winnerCard.getName()).isEqualTo(NameCardEnum.Sirene.name());
+        assertThat(winnerCard.getValue()).isEqualTo(cards.get(1).getValue());
+        assertThat(winnerCard).isEqualTo(cards.get(1));
     }
 
     @Test
@@ -121,9 +124,9 @@ public class FoldManagementTest {
         Card winnerCard = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.Pirate.name(), winnerCard.getName());
-        Assertions.assertEquals(0, winnerCard.getValue());
-        Assertions.assertEquals(cards.get(2), winnerCard);
+        assertThat(winnerCard.getName()).isEqualTo(NameCardEnum.Pirate.name());
+        assertThat(winnerCard.getValue()).isEqualTo(cards.get(2).getValue());
+        assertThat(winnerCard).isEqualTo(cards.get(2));
     }
 
     @Test
@@ -141,10 +144,11 @@ public class FoldManagementTest {
         Card winnerCard = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.SkullKing.name(), winnerCard.getName());
-        Assertions.assertEquals(0, winnerCard.getValue());
-        Assertions.assertEquals(cards.get(5), winnerCard);
+        assertThat(winnerCard.getName()).isEqualTo(NameCardEnum.SkullKing.name());
+        assertThat(winnerCard.getValue()).isEqualTo(cards.get(5).getValue());
+        assertThat(winnerCard).isEqualTo(cards.get(5));
     }
+
     @Test
     public void sirene_card_winner_against_all_cards_with_pirate_and_skullKing_in_this_fold() {
         // Given
@@ -160,10 +164,11 @@ public class FoldManagementTest {
         Card winnerCard = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.Sirene.name(), winnerCard.getName());
-        Assertions.assertEquals(0, winnerCard.getValue());
-        Assertions.assertEquals(cards.get(5), winnerCard);
+        assertThat(winnerCard.getName()).isEqualTo(NameCardEnum.Sirene.name());
+        assertThat(winnerCard.getValue()).isEqualTo(cards.get(5).getValue());
+        assertThat(winnerCard).isEqualTo(cards.get(5));
     }
+
     @Test
     public void highest_value_card_winner_against_all_cards_because_of_baleine_in_this_fold() {
         // Given
@@ -179,9 +184,9 @@ public class FoldManagementTest {
         Card winnerCard = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.Yellow.name(), winnerCard.getName());
-        Assertions.assertEquals(10, winnerCard.getValue());
-        Assertions.assertEquals(cards.get(0), winnerCard);
+        assertThat(winnerCard.getName()).isEqualTo(NameCardEnum.Yellow.name());
+        assertThat(winnerCard.getValue()).isEqualTo(cards.get(0).getValue());
+        assertThat(winnerCard).isEqualTo(cards.get(0));
     }
 
     @Test
@@ -268,8 +273,8 @@ public class FoldManagementTest {
         Card winnerCard = foldManagement.selectWinner(cards);
 
         // Then
-        Assertions.assertEquals(NameCardEnum.Yellow.name(), winnerCard.getName());
-        Assertions.assertEquals(10, winnerCard.getValue());
-        Assertions.assertEquals(cards.get(0), winnerCard);
+        assertThat(winnerCard.getName()).isEqualTo(NameCardEnum.Yellow.name());
+        assertThat(winnerCard.getValue()).isEqualTo(cards.get(0).getValue());
+        assertThat(winnerCard).isEqualTo(cards.get(0));
     }
 }
