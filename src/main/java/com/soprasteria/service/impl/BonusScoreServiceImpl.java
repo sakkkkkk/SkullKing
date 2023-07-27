@@ -8,12 +8,12 @@ import java.util.List;
 
 public class BonusScoreServiceImpl implements BonusScoreService {
 
-    private final FoldServiceImpl foldManagement = new FoldServiceImpl();
+    private final FoldServiceImpl foldService = new FoldServiceImpl();
 
     public int countBonus(List<Card> cards) {
         int bonus = 0;
 
-        if (foldManagement.selectWinner(cards) == null) {
+        if (foldService.selectWinner(cards) == null) {
             return bonus;
         }
 
@@ -44,6 +44,6 @@ public class BonusScoreServiceImpl implements BonusScoreService {
     }
 
     private boolean cardType(List<Card> cards, String type) {
-        return foldManagement.selectWinner(cards).getName().equals(type);
+        return foldService.selectWinner(cards).getName().equals(type);
     }
 }

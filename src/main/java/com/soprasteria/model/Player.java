@@ -5,9 +5,9 @@ import java.util.List;
 public class Player {
     private int id;
     private String name;
-    private List<Card> cards;
     private int bet;
     private int totalScore;
+    private List<Card> cards;
     private List<Fold> folds;
 
     public int getId() {
@@ -26,6 +26,14 @@ public class Player {
         this.name = name;
     }
 
+    public int getBet() {
+        return bet;
+    }
+
+    public void setBet(int bet) {
+        this.bet = bet;
+    }
+
     public int getTotalScore() {
         return totalScore;
     }
@@ -35,12 +43,12 @@ public class Player {
         return totalScore;
     }
 
-    public int getBet() {
-        return bet;
+    public List<Card> getCards() {
+        return cards;
     }
 
-    public void setBet(int bet) {
-        this.bet = bet;
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
     }
 
     public List<Fold> getFolds() {
@@ -56,13 +64,5 @@ public class Player {
         this.name = name;
         this.bet = bet;
         this.folds = folds;
-    }
-
-    public List<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
     }
 }

@@ -5,6 +5,7 @@ import com.soprasteria.service.ScoreService;
 import static java.lang.Math.abs;
 
 public class ScoreServiceImpl implements ScoreService {
+
     public int scoreCounter(int bet, int numberOfFoldsWon, int setNumber) {
         int score;
 
