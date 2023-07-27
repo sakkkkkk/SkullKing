@@ -1,4 +1,4 @@
-package com.soprasteria.managementTest;
+package com.soprasteria.serviceImplTest;
 
 import com.soprasteria.enums.NameCardEnum;
 import com.soprasteria.service.impl.TotalScoreServiceImpl;
@@ -13,11 +13,19 @@ import java.util.List;
 import static java.lang.Math.abs;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TotalScoreManagementTest {
+public class TotalScoreServiceImplTest {
+
+    private final Integer POINTS_PER_FOLD_IF_BET_EQUALS_0 = 10;
+    private final Integer POINTS_PER_FOLD_IF_BET_SUP_TO_0_FAILED = -10;
+    private final Integer POINTS_PER_FOLD_IF_BET_SUP_TO_0_SUCCESS = 20;
+    private final Integer POINTS_PER_COLOR_VALUE_14_COLLECTED = 10;
+    private final Integer POINTS_PER_PIRATE_COLLECTED = 30;
+    private final Integer POINTS_FOR_ATOUT_VALUE_14_COLLECTED = 30;
+
     private final TotalScoreServiceImpl totalScoreManagement = new TotalScoreServiceImpl();
 
     @Test
-    public void total_score_30_bet_0_fold_success_AND_bonus_0() {
+    void test_total_score_30_if_bet_0_fold_success_AND_bonus_0() {
         // Given
         List<Fold> folds = new ArrayList<>();
         Player player = new Player(1, "Anoussak", 0, folds);
@@ -27,12 +35,11 @@ public class TotalScoreManagementTest {
         int totalScore = totalScoreManagement.totalScore(player, setNumber);
 
         // Then
-        int scorePerFoldWithBet0Success = 10;
-        assertThat(totalScore).isEqualTo(setNumber * scorePerFoldWithBet0Success);
+        assertThat(totalScore).isEqualTo(setNumber * POINTS_PER_FOLD_IF_BET_EQUALS_0);
     }
     
     @Test
-    public void total_score_40_bet_1_fold_success_with_bonus_20_with_two_number_card_14_in_this_set() {
+    void test_total_score_40_if_bet_1_fold_success_with_bonus_20_with_two_number_card_14_in_this_set() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -49,12 +56,11 @@ public class TotalScoreManagementTest {
         int totalScore = totalScoreManagement.totalScore(player, setNumber);
 
         // Then
-        int scorePerFoldWithBet1Success = 20;
-        assertThat(totalScore).isEqualTo(player.getBet() * scorePerFoldWithBet1Success + 2 * 10);
+        assertThat(totalScore).isEqualTo(player.getBet() * POINTS_PER_FOLD_IF_BET_SUP_TO_0_SUCCESS + 2 * POINTS_PER_COLOR_VALUE_14_COLLECTED);
     }
 
     @Test
-    public void total_score_minus_10_bet_2_folds_failed() {
+    void test_total_score_minus_10_if_bet_2_folds_failed() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -71,12 +77,11 @@ public class TotalScoreManagementTest {
         int totalScore = totalScoreManagement.totalScore(player, setNumber);
 
         // Then
-        int scorePerFoldBet2Failed = - 10;
-        assertThat(totalScore).isEqualTo(abs(player.getBet() - setNumber) * scorePerFoldBet2Failed);
+        assertThat(totalScore).isEqualTo(abs(player.getBet() - setNumber) * POINTS_PER_FOLD_IF_BET_SUP_TO_0_FAILED);
     }
 
     @Test
-    public void total_score_140_with_bonus_80_first_fold_won_AND_bonus_20_second_fold_won_in_this_set() {
+    void test_total_score_140_with_bonus_80_first_fold_won_AND_bonus_20_second_fold_won_in_this_set() {
         // Given
         List<Card> cards1 = new ArrayList<>();
         cards1.add(0, new Card(NameCardEnum.Atout.name(), 14));
@@ -101,8 +106,7 @@ public class TotalScoreManagementTest {
         int totalScore = totalScoreManagement.totalScore(player, setNumber);
 
         // Then
-        int scorePerFoldBet2Success = 20;
-        int bonus = 2 * 30 + 20 + 2 * 10;
-        assertThat(totalScore).isEqualTo(player.getBet() * scorePerFoldBet2Success + bonus);
+        int BONUS = POINTS_FOR_ATOUT_VALUE_14_COLLECTED + 2 * POINTS_PER_PIRATE_COLLECTED + 2 * POINTS_PER_COLOR_VALUE_14_COLLECTED;
+        assertThat(totalScore).isEqualTo(player.getBet() * POINTS_PER_FOLD_IF_BET_SUP_TO_0_SUCCESS + BONUS);
     }
 }

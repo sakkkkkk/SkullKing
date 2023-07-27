@@ -18,6 +18,7 @@ public class TotalScoreServiceImpl implements TotalScoreService {
                 bonus += bonusManagement.countBonus(player.getFolds().get(foldIndex).getCards());
             }
         }
+
         return player.setTotalScore(score + bonus);
     }
 }

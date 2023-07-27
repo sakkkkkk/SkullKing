@@ -6,8 +6,6 @@ import com.soprasteria.service.FoldService;
 
 import java.util.List;
 
-//@RestController
-//@RequestMapping("/")
 public class FoldServiceImpl implements FoldService {
 
     public Card selectWinner(List<Card> cards) {

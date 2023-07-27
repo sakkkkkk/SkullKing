@@ -1,7 +1,6 @@
 package com.soprasteria.service;
 
 import com.soprasteria.model.Card;
-import com.soprasteria.service.impl.BonusScoreServiceImpl;
 
 import java.util.List;
 

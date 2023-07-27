@@ -1,4 +1,4 @@
-package com.soprasteria.managementTest;
+package com.soprasteria.serviceImplTest;
 
 import com.soprasteria.enums.NameCardEnum;
 import com.soprasteria.service.impl.DeckServiceImpl;
@@ -11,23 +11,31 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DeckManagementTest {
+public class DeckServiceImplTest {
+
+    private final Integer NUMBER_OF_CARDS_PER_COLOR_AND_ATOUT = 14;
+    private final Integer NUMBER_OF_PIRATE = 6;
+    private final Integer NUMBER_OF_SIRENE = 2;
+    private final Integer NUMBER_OF_SKULLKING = 1;
+    private final Integer NUMBER_OF_KRAKEN = 1;
+    private final Integer NUMBER_OF_BALEINE = 1;
+    private final Integer NUMBER_OF_ECHAPE = 7;
 
     DeckServiceImpl deckManagement = new DeckServiceImpl();
+
     @Test
-    public void total_cards_in_deck_of_skull_king_game() {
-        // Given
+    void test_total_cards_in_skullking_deck() {
+        // Given & When
         List<Card> deck = deckManagement.skullKingDeck();
 
-        // When
-
         // Then
-        int totalExpected = 4 * 14 + 6 + 2 + 1 + 1 + 1 + 7;
+        int totalExpected = 4 * NUMBER_OF_CARDS_PER_COLOR_AND_ATOUT + NUMBER_OF_PIRATE + NUMBER_OF_SIRENE
+                + NUMBER_OF_SKULLKING + NUMBER_OF_KRAKEN + NUMBER_OF_BALEINE + NUMBER_OF_ECHAPE;
         assertThat(deck.size()).isEqualTo(totalExpected);
     }
 
     @Test
-    public void total_of_each_color_cards_and_atout_in_deck_of_skull_king_game() {
+    void test_total_of_each_color_cards_and_atout_in_the_skull_king_deck() {
         // Given
         List<Card> deck = deckManagement.skullKingDeck();
         List<Integer> totalEachColorAndAtout = new ArrayList<>();
@@ -45,7 +53,7 @@ public class DeckManagementTest {
     }
 
     @Test
-    public void total_of_each_special_card_in_deck_of_skull_king_game() {
+    void test_total_of_each_special_card_in_the_skull_king_deck() {
         // Given
         List<Card> deck = deckManagement.skullKingDeck();
         List<Integer> totalEachSpecialCard = new ArrayList<>();
@@ -63,7 +71,7 @@ public class DeckManagementTest {
     }
 
     @Test
-    public void all_color_and_atout_cards_are_distinct_in_deck_of_skull_king_game() {
+    void test_if_all_color_and_atout_cards_are_distinct_in_the_skull_king_deck() {
         // Given
         List<Card> deck = deckManagement.skullKingDeck();
         List<Boolean> allDistinct = new ArrayList<>();
@@ -80,18 +88,18 @@ public class DeckManagementTest {
     }
 
     @Test
-    public void all_each_special_card_are_equals_in_deck_of_skull_king_game() {
+    void test_if_all_each_special_card_type_are_equals_in_the_skull_king_deck() {
         // Given
         List<Card> deck = deckManagement.skullKingDeck();
-        List<Boolean> allEquals = new ArrayList<>();
+        List<Boolean> eachCardTypeAllEquals = new ArrayList<>();
 
         // When
         for (int nameCardEnumIndex = NameCardEnum.Pirate.ordinal(); nameCardEnumIndex < NameCardEnum.values().length; nameCardEnumIndex++) {
             int finalNameCardEnumIndex = nameCardEnumIndex;
-            allEquals.add(deck.stream().filter(c -> c.getName().equals(NameCardEnum.getNameCard(finalNameCardEnumIndex).name())).distinct().count() == 1);
+            eachCardTypeAllEquals.add(deck.stream().filter(c -> c.getName().equals(NameCardEnum.getNameCard(finalNameCardEnumIndex).name())).distinct().count() == 1);
         }
         // Then
-        for (Boolean equal : allEquals) {
+        for (Boolean equal : eachCardTypeAllEquals) {
             Assertions.assertTrue(equal);
         }
     }

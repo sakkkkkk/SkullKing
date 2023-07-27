@@ -22,7 +22,9 @@ public class DeckServiceImpl implements DeckService {
             }
 
             else {
-                allCards.addAll(Collections.nCopies(NameCardEnum.getNameCard(nameCardEnumIndex).getMultiplicityOfCardEnum(), new Card(NameCardEnum.getNameCard(nameCardEnumIndex).name(), 0)));
+                allCards.addAll(
+                        Collections.nCopies(NameCardEnum.getNameCard(nameCardEnumIndex).getMultiplicityOfCardEnum(),
+                                new Card(NameCardEnum.getNameCard(nameCardEnumIndex).name(), 0)));
             }
         }
 

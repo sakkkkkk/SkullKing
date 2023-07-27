@@ -1,4 +1,4 @@
-package com.soprasteria.managementTest;
+package com.soprasteria.serviceImplTest;
 
 import com.soprasteria.enums.NameCardEnum;
 import com.soprasteria.service.impl.FoldServiceImpl;
@@ -13,12 +13,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = FoldServiceImpl.class)
-public class FoldManagementTest {
+public class FoldServiceImplTest {
 
     private final FoldServiceImpl foldManagement = new FoldServiceImpl();
 
     @Test
-    public void color_yellow_request_by_first_card_played_in_this_fold() {
+    void test_color_yellow_request_by_first_card_played_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -33,7 +33,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void highest_value_yellow_card_against_all_color_yellow_card_request_by_first_card_played_in_this_fold() {
+    void test_highest_value_yellow_card_winner_against_all_color_yellow_card_request_by_first_card_played_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -52,7 +52,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void atout_card_winner_with_atout_first_card_played_against_all_color_cards_in_this_fold() {
+    void test_atout_card_winner_with_atout_first_card_played_against_all_color_cards_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Atout.name(), 6));
@@ -71,7 +71,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void highest_value_atout_card_winner_against_all_color_cards_in_this_fold() {
+    void test_highest_value_atout_card_winner_against_all_color_cards_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -90,7 +90,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void first_sirene_card_winner_against_all_color_and_atout_cards_without_pirate_and_skullKing_in_this_fold() {
+    void test_first_sirene_card_winner_against_all_color_and_atout_cards_without_pirate_and_skullKing_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -110,7 +110,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void first_pirate_card_winner_against_all_cards_without_skullKing_in_this_fold() {
+    void test_first_pirate_card_winner_against_all_cards_without_skullKing_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -130,7 +130,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void skullKing_card_winner_against_all_cards_without_sirene_in_this_fold() {
+    void test_skullKing_card_winner_against_all_cards_without_sirene_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -150,7 +150,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void sirene_card_winner_against_all_cards_with_pirate_and_skullKing_in_this_fold() {
+    void test_sirene_card_winner_against_all_cards_with_pirate_and_skullKing_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 5));
@@ -170,7 +170,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void highest_value_card_winner_against_all_cards_because_of_baleine_in_this_fold() {
+    void test_highest_value_card_winner_against_all_cards_because_of_baleine_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 10));
@@ -190,7 +190,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void no_card_winner_because_of_kraken_without_baleine_after_in_this_fold() {
+    void test_no_card_winner_because_of_kraken_without_baleine_after_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 10));
@@ -208,7 +208,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void no_card_winner_because_of_all_echape_cards_in_this_fold() {
+    void test_no_card_winner_because_of_all_echape_cards_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Echape.name(), 0));
@@ -224,7 +224,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void no_card_winner_because_of_all_echape_cards_and_baleine_in_this_fold() {
+    void test_no_card_winner_because_of_all_echape_cards_and_baleine_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Echape.name(), 0));
@@ -241,7 +241,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void no_card_winner_because_of_kraken_after_baleine_in_this_fold() {
+    void test_no_card_winner_because_of_kraken_after_baleine_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 10));
@@ -259,7 +259,7 @@ public class FoldManagementTest {
     }
 
     @Test
-    public void yellow10_card_winner_because_of_baleine_after_kraken_in_this_fold() {
+    void test_yellow10_card_winner_because_of_baleine_after_kraken_in_this_fold() {
         // Given
         List<Card> cards = new ArrayList<>();
         cards.add(0, new Card(NameCardEnum.Yellow.name(), 10));

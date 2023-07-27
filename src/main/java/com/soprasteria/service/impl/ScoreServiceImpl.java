@@ -11,15 +11,19 @@ public class ScoreServiceImpl implements ScoreService {
         if (bet > 0 && bet == numberOfFoldsWon) {
             score = 20 * bet;
         }
+
         else if (bet > 0) {
             score = -10 * abs(bet - numberOfFoldsWon);
         }
+
         else if (bet == 0 && bet == numberOfFoldsWon) {
             score = 10 * setNumber;
         }
+
         else {
             score = -10 * setNumber;
         }
+
         return score;
     }
 }
