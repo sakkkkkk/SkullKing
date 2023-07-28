@@ -6,5 +6,5 @@ import com.soprasteria.model.Player;
 import java.util.List;
 
 public interface DistributionService {
-    List<Card> distributeCards(List<Player> players, int setNumber);
+    List<List<Card>> distributeCards(List<Card> skullKingDeck, List<Player> players, int setNumber);
 }
